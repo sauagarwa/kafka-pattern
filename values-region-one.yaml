@@ -9,19 +9,23 @@ clusterGroup:
   isHubCluster: false
 
   namespaces:
-    # - config-demo
+  - amq-streams
+      # - config-demo
 
   subscriptions:
+  - name: amq-streams
+    namespace: amq-streams
+    channel: amq-streams-2.x
+    csv: amqstreams.v2.0.1-0
 
   projects:
-    # - config-demo
+  - kafka
 
   applications:
-    # config-demo:
-    #   name: config-demo
-    #   namespace: config-demo
-    #   project: config-demo
-    #   path: charts/all/config-demo
+  - name: kafka-cluster
+    namespace: amq-streams
+    project: kafka
+    path: charts/all/kafka
 
 
   imperative:

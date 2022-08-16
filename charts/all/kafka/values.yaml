@@ -1,0 +1,17 @@
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+global:
+  localClusterDomain: local.example.com
+  hubClusterDomain: hub.example.com
+
+kafka:
+  broker:
+    uri: "factory-kafka-cluster-kafka-bootstrap:9092"
+    topic:
+      temperature: "manuela-factory.iot-sensor-sw-temperature"
+      vibration: "manuela-factory.iot-sensor-sw-vibration"

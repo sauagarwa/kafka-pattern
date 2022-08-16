@@ -1,6 +1,6 @@
 ---
 global:
-  pattern: multicloud-gitops
+  pattern: kafka-pattern
 
   options:
     useCSV: false
