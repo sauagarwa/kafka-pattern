@@ -22,7 +22,7 @@ clusterGroup:
   - kafka
 
   applications:
-  - name: kafka-cluster
+  - name: amq-streams
     namespace: amq-streams
     project: kafka
     path: charts/all/kafka

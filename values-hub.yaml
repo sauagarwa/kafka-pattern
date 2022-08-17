@@ -19,7 +19,7 @@ clusterGroup:
       channel: release-2.5
       csv: advanced-cluster-management.v2.5.0
     
-     amqstreams:
+    amq-streams:
       name: amq-streams
       namespace: amq-streams
       channel: amq-streams-2.x
@@ -74,8 +74,8 @@ clusterGroup:
       project: hub
       path: common/golang-external-secrets
 
-    kafka-cluster:
-      name: kafka-cluster
+    amq-streams:
+      name: amq-streams
       namespace: amq-streams
       project: kafka
       path: charts/all/kafka
