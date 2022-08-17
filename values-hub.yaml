@@ -74,6 +74,12 @@ clusterGroup:
       project: hub
       path: common/golang-external-secrets
 
+    kafka-cluster:
+      name: kafka-cluster
+      namespace: amq-streams
+      project: kafka
+      path: charts/all/kafka
+
     # config-demo:
     #   name: config-demo
     #   namespace: config-demo
