@@ -9,7 +9,7 @@ clusterGroup:
   - open-cluster-management
   - vault
   - golang-external-secrets
-  - amqstreams
+  - amq-streams
   # - config-demo
 
   subscriptions:
@@ -21,7 +21,7 @@ clusterGroup:
     
      amqstreams:
       name: amq-streams
-      namespace: amqstreams
+      namespace: amq-streams
       channel: amq-streams-2.x
       csv: amqstreams.v2.0.1-0
 
