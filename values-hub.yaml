@@ -78,18 +78,18 @@ clusterGroup:
       overrides:
       - name: clusterset.name
         value: submariner
-      - name: clusterset.clusters.0.name
-        value: gcloud
-      - name: clusterset.clusters.0.creds.token
-        value: TOKEN_0
-      - name: clusterset.clusters.0.creds.server
-        value: SERVER_0
-      - name: clusterset.clusters.1.name
-        value: aws
-      - name: clusterset.clusters.1.creds.token
-        value: TOKEN_1
-      - name: clusterset.clusters.0.creds.server
-        value: SERVER_1
+      # - name: clusterset.clusters.0.name
+      #   value: gcloud
+      # - name: clusterset.clusters.0.creds.token
+      #   value: TOKEN_0
+      # - name: clusterset.clusters.0.creds.server
+      #   value: SERVER_0
+      # - name: clusterset.clusters.1.name
+      #   value: aws
+      # - name: clusterset.clusters.1.creds.token
+      #   value: TOKEN_1
+      # - name: clusterset.clusters.0.creds.server
+      #   value: SERVER_1
 
     golang-external-secrets:
       name: golang-external-secrets
