@@ -75,9 +75,9 @@ clusterGroup:
       namespace: submariner
       project: submariner
       path: charts/all/submariner
-      # overrides:
-      # - name: clusterset.name
-      #   value: submariner
+      overrides:
+      - name: clusterset.name
+        value: submariner
       # - name: clusterset.clusters.0.name
       #   value: gcloud
       # - name: clusterset.clusters.0.creds.token
