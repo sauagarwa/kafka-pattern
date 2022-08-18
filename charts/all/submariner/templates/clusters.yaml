@@ -25,7 +25,7 @@ metadata:
     name: "{{ .name }}"
     cloud: auto-detect
     vendor: auto-detect
-    clusterGroup: {{ .clusterGroupLabel }} # needs to be replaced by labels
+    clusterGroup: {{ .clusterGroupLabel }}
     cluster.open-cluster-management.io/clusterset: "{{ $clustersetName }}"
 spec:
   hubAcceptsClient: true
@@ -53,11 +53,10 @@ spec:
     name: {{ .name }}
     cloud: auto-detect
     vendor: auto-detect
-    clusterGroup: {{ .clusterGroupLabel }} # needs to be replaced by labels
+    clusterGroup: {{ .clusterGroupLabel }}
     cluster.open-cluster-management.io/clusterset: "{{ $clustersetName }}"
   applicationManager:
     enabled: true
-    argocdCluster: false
   policyController:
     enabled: true
   searchCollector:
