@@ -1,0 +1,69 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1alpha1
+kind: ManagedClusterSet
+metadata:
+  name: "{{ .Values.clusterset.name }}"
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: clusterrole1
+rules:
+  - apiGroups: ["cluster.open-cluster-management.io"]
+    resources: ["managedclustersets/join"]
+    resourceNames: ["{{ .Values.clusterset.name }}"]
+    verbs: ["create"]
+
+{{- $clustersetName := $.Values.clusterset.name }}
+{{- range $.Values.clusterset.clusters }}
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  name: "{{ .name }}"
+  labels:
+    name: "{{ .name }}"
+    cloud: auto-detect
+    vendor: auto-detect
+    clusterGroup: {{ .clusterGroupLabel }} # needs to be replaced by labels
+    cluster.open-cluster-management.io/clusterset: "{{ $clustersetName }}"
+spec:
+  hubAcceptsClient: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: auto-import-secret
+  namespace: {{ .name }}
+stringData:
+  autoImportRetry: "2"
+  token: {{ .creds.token }}
+  server: {{ .creds.server }}
+type: Opaque
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: {{ .name }}
+  namespace: {{ .name }}
+spec:
+  clusterName: {{ .name }}
+  clusterNamespace: {{ .name }}
+  clusterLabels:
+    name: {{ .name }}
+    cloud: auto-detect
+    vendor: auto-detect
+    clusterGroup: {{ .clusterGroupLabel }} # needs to be replaced by labels
+    cluster.open-cluster-management.io/clusterset: "{{ $clustersetName }}"
+  applicationManager:
+    enabled: true
+    argocdCluster: false
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+{{- end }}
