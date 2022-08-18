@@ -1,0 +1,8 @@
+clusterset:
+  name: clusterset1
+  clusters:
+  - name: cluster1
+    provider: gcloud
+  - name: cluster2
+    provider: aws
+    

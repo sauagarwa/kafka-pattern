@@ -10,6 +10,7 @@ clusterGroup:
   - vault
   - golang-external-secrets
   - amq-streams
+  - submariner
   # - config-demo
 
   subscriptions:
@@ -67,6 +68,21 @@ clusterGroup:
         value: "registry.connect.redhat.com/hashicorp/vault"
       - name: server.image.tag
         value: "1.10.3-ubi"
+
+    submariner:
+      name: submariner
+      namespace: submariner
+      project: submariner
+      chart: submariner
+      path: charts/all/submariner
+      overrides:
+        clusterset:
+          name: submariner
+          clusters:
+          - name: gcloud
+            provider: gcloud
+          - name: aws
+            provider: aws
 
     golang-external-secrets:
       name: golang-external-secrets
