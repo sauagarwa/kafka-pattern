@@ -28,6 +28,7 @@ clusterGroup:
 
   projects:
   - hub
+  - submariner
   # - config-demo
 
   applications:
