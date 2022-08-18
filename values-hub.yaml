@@ -75,6 +75,14 @@ clusterGroup:
       namespace: submariner
       project: submariner
       path: charts/all/submariner
+      overrides:
+        clusterset:
+          name: submariner
+          clusters:
+          - name: gcloud
+            provider: gcloud
+          - name: aws
+            provider: aws
 
     golang-external-secrets:
       name: golang-external-secrets
