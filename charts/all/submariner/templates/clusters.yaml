@@ -29,17 +29,17 @@ metadata:
     cluster.open-cluster-management.io/clusterset: "{{ $clustersetName }}"
 spec:
   hubAcceptsClient: true
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: auto-import-secret
-  namespace: {{ .name }}
-stringData:
-  autoImportRetry: "2"
-  token: {{ .creds.token }}
-  server: {{ .creds.server }}
-type: Opaque
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: auto-import-secret
+#   namespace: {{ .name }}
+# stringData:
+#   autoImportRetry: "2"
+#   token: {{ .creds.token }}
+#   server: {{ .creds.server }}
+# type: Opaque
 ---
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
