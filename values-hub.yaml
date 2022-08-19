@@ -80,17 +80,20 @@ clusterGroup:
         value: submariner
       - name: clusterset.clusters.0.name
         value: gcloud
+      - name: clusterset.clusters.0.clusterGroupLabel
+        value: region-one
       - name: clusterset.clusters.0.creds.token
-        value: TOKEN_0
+        value: TOKEN_00
       - name: clusterset.clusters.0.creds.server
-        value: SERVER_0
+        value: SERVER_00
       - name: clusterset.clusters.1.name
         value: aws
+      - name: clusterset.clusters.1.clusterGroupLabel
+        value: region-two
       - name: clusterset.clusters.1.creds.token
-        value: TOKEN_1
+        value: TOKEN_11
       - name: clusterset.clusters.0.creds.server
-        value: SERVER_1
-
+        value: SERVER_11
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
