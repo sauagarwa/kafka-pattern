@@ -92,7 +92,7 @@ clusterGroup:
         value: region-two
       - name: clusterset.clusters.1.creds.token
         value: TOKEN_11
-      - name: clusterset.clusters.0.creds.server
+      - name: clusterset.clusters.1.creds.server
         value: SERVER_11
     golang-external-secrets:
       name: golang-external-secrets
