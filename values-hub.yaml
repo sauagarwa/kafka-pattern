@@ -88,6 +88,10 @@ clusterGroup:
         value: secret/hub/gcloud-cluster
       - name: clusterset.clusters.0.serverPath
         value: secret/hub/gcloud-cluster
+      - name: clusterset.clusters.0.provider
+        value: gcloud
+      - name: clusterset.clusters.0.cloudCredentialPath
+        value: secret/hub/gcloud-credentials
       - name: clusterset.clusters.1.name
         value: aws
       - name: clusterset.clusters.1.clusterGroupLabel
@@ -96,6 +100,12 @@ clusterGroup:
         value: secret/hub/aws-cluster
       - name: clusterset.clusters.1.serverPath
         value: secret/hub/aws-cluster
+      - name: clusterset.clusters.1.instanceType
+        value: c5n.metal
+      - name: clusterset.clusters.1.provider
+        value: aws
+      - name: clusterset.clusters.1.cloudCredentialPath
+        value: secret/hub/aws-credentials
 
     golang-external-secrets:
       name: golang-external-secrets

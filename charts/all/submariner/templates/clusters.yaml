@@ -42,7 +42,7 @@ spec:
     name: "{{ $clusterSecretStoreName }}"
     kind: ClusterSecretStore
   target:
-    name: 
+    name: auto-import-secret
     creationPolicy: Owner
   data:
   - secretKey: token
