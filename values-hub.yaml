@@ -11,7 +11,7 @@ clusterGroup:
   - golang-external-secrets
   - amq-streams
   - submariner
-  - clusterconfig
+  - clustersconfig
   - gcloud-cl2
   - gcloud-cl1
   # - config-demo
@@ -31,7 +31,7 @@ clusterGroup:
 
   projects:
   - hub
-  - clusterconfig
+  - clustersconfig
   - submariner
   # - config-demo
 
@@ -74,11 +74,11 @@ clusterGroup:
       - name: server.image.tag
         value: "1.10.3-ubi"
 
-    clusterconfig:
-      name: clusterconfig
-      namespace: clusterconfig
-      project: clusterconfig
-      path: charts/all/clusterconfig
+    clustersconfig:
+      name: clustersconfig
+      namespace: clustersconfig
+      project: clustersconfig
+      path: charts/all/clustersconfig
       overrides:
       - name: vault.clusterSecretStoreName
         value: vault-backend
