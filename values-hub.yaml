@@ -11,6 +11,8 @@ clusterGroup:
   - golang-external-secrets
   - amq-streams
   - submariner
+  - gcloud-cl2
+  - gcloud-cl1
   # - config-demo
 
   subscriptions:
