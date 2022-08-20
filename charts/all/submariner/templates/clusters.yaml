@@ -33,37 +33,26 @@ spec:
   hubAcceptsClient: true
 ---
 apiVersion: external-secrets.io/v1alpha1
- kind: ExternalSecret
- metadata:
-   name: auto-import-secret
-   namespace: {{ .name }}
- spec:
-   secretStoreRef:
-     name: "{{ $clusterSecretStoreName }}"
-     kind: ClusterSecretStore
-   target:
-     name: 
-     creationPolicy: Owner
-   data:
-   - secretKey: token
-     remoteRef:
-       key: {{ .tokenPath }}
-       property: token
-   - secretKey: token
-     remoteRef:
-       key: {{ .serverPath }}
-       property: server
-# ---
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: auto-import-secret
-#   namespace: {{ .name }}
-# stringData:
-#   autoImportRetry: "2"
-#   token: {{ .creds.token }}
-#   server: {{ .creds.server }}
-# type: Opaque
+kind: ExternalSecret
+metadata:
+  name: auto-import-secret
+  namespace: {{ .name }}
+spec:
+  secretStoreRef:
+    name: "{{ $clusterSecretStoreName }}"
+    kind: ClusterSecretStore
+  target:
+    name: 
+    creationPolicy: Owner
+  data:
+  - secretKey: token
+    remoteRef:
+      key: {{ .tokenPath }}
+      property: token
+  - secretKey: token
+    remoteRef:
+      key: {{ .serverPath }}
+      property: server
 ---
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
