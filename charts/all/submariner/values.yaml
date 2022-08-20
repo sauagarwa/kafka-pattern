@@ -1,16 +1,15 @@
+vault:
+  clusterSecretStoreName: vault-backend
 clusterset:
   name: clusterset1
   clusters:
   - name: cluster1
     provider: gcloud
     clusterGroupLabel: region-one
-    creds:
-      token: TOKEN
-      server: URL
+    tokenPath: secret/hub/gcloud-cluster
+    serverPath: secret/hub/gcloud-cluster
   - name: cluster2
     provider: aws
     clusterGroupLabel: region-two
-    creds:
-      token: TOKEN
-      server: URL
-    
+    tokenPath: secret/hub/aws-cluster
+    serverPath: secret/hub/aws-cluster

@@ -76,24 +76,27 @@ clusterGroup:
       project: submariner
       path: charts/all/submariner
       overrides:
+      - name: vault.clusterSecretStoreName
+        value: vault-backend
       - name: clusterset.name
         value: submariner
       - name: clusterset.clusters.0.name
         value: gcloud
       - name: clusterset.clusters.0.clusterGroupLabel
-        value: region-one
-      - name: clusterset.clusters.0.creds.token
-        value: TOKEN_00
-      - name: clusterset.clusters.0.creds.server
-        value: SERVER_00
+        value: region-two
+      - name: clusterset.clusters.0.tokenPath
+        value: secret/hub/gcloud-cluster
+      - name: clusterset.clusters.0.serverPath
+        value: secret/hub/gcloud-cluster
       - name: clusterset.clusters.1.name
         value: aws
       - name: clusterset.clusters.1.clusterGroupLabel
-        value: region-two
-      - name: clusterset.clusters.1.creds.token
-        value: TOKEN_11
-      - name: clusterset.clusters.1.creds.server
-        value: SERVER_11
+        value: region-one
+      - name: clusterset.clusters.1.tokenPath
+        value: secret/hub/aws-cluster
+      - name: clusterset.clusters.1.serverPath
+        value: secret/hub/aws-cluster
+
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
