@@ -55,14 +55,14 @@ spec:
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
 metadata:
-  name: {{ .name }}-aws-creds
+  name: {{ .name }}-gcp-creds
   namespace: {{ .name }}
 spec:
   secretStoreRef:
     name: "{{ $clusterSecretStoreName }}"
     kind: ClusterSecretStore
   target:
-    name: {{ .name }}-aws-creds
+    name: {{ .name }}-gcp-creds
     creationPolicy: Owner
   data:
   - secretKey: osServiceAccount.json
