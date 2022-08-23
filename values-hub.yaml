@@ -95,7 +95,7 @@ clusterGroup:
       - name: clusterset.clusters.0.provider
         value: gcloud
       - name: clusterset.clusters.0.cloudCredentialPath
-        value: secret/hub/gcloud-cl1-creds
+        value: secret/hub/osServiceAccount.json
       - name: clusterset.clusters.1.name
         value: gcloud-cl2
       - name: clusterset.clusters.1.clusterGroupLabel
@@ -107,7 +107,7 @@ clusterGroup:
       - name: clusterset.clusters.1.provider
         value: gcloud
       - name: clusterset.clusters.1.cloudCredentialPath
-        value: secret/hub/gcloud-cl1-creds
+        value: secret/hub/osServiceAccount.json
     
     submariner:
       name: submariner

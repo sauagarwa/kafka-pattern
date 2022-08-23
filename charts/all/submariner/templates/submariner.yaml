@@ -68,7 +68,7 @@ spec:
   - secretKey: osServiceAccount.json
     remoteRef:
       key: {{ .cloudCredentialPath }}
-      property: osServiceAccount.json
+      property: content
 ---
 apiVersion: submarineraddon.open-cluster-management.io/v1alpha1
 kind: SubmarinerConfig

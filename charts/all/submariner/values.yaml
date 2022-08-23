@@ -1,3 +1,12 @@
+# For gcp
+# key of gcloud-credentials is content osServiceAccount.json 
+# vault push secret files option is used to push  osServiceAccount.json 
+# and the key is created as content
+
+# For aws
+# key of aws-credentials is pushed as aws_access_key_id, and aws_secret_access_key
+# template can be enhanced to pass the key names
+
 vault:
   clusterSecretStoreName: vault-backend
 clusterset:
