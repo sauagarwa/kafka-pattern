@@ -150,8 +150,10 @@ spec:
 {{- if eq $.Values.global.options.syncPolicy "Automatic" }}
   syncPolicy:
     automated: {}
+    {{- if .retry }}
     retry:
-      limit: {{ .retry | 5 }}
+      limit: {{ .retry }}
+    {{- end }}
     #  selfHeal: true
 {{- end }}
 ---
