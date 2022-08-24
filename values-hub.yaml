@@ -12,8 +12,8 @@ clusterGroup:
   - amq-streams
   - submariner
   - clustersconfig
-  - gcloud-cl2
-  - gcloud-cl1
+  - aws-cl1
+  - aws-cl2
   # - config-demo
 
   subscriptions:
@@ -33,6 +33,7 @@ clusterGroup:
   - hub
   - clustersconfig
   - submariner
+  
   # - config-demo
 
   applications:
@@ -85,6 +86,7 @@ clusterGroup:
         value: vault-backend
       - name: clusterset.name
         value: submariner
+
       - name: clusterset.clusters.0.name
         value: aws-cl1
       - name: clusterset.clusters.0.clusterGroupLabel
@@ -99,6 +101,7 @@ clusterGroup:
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.0.instanceType
         value: secret/hub/m5.xlarge
+
       - name: clusterset.clusters.1.name
         value: aws-cl2
       - name: clusterset.clusters.1.clusterGroupLabel
@@ -125,6 +128,7 @@ clusterGroup:
         value: vault-backend
       - name: clusterset.name
         value: submariner
+        
       - name: clusterset.clusters.0.name
         value: aws-cl1
       - name: clusterset.clusters.0.clusterGroupLabel
@@ -139,6 +143,7 @@ clusterGroup:
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.0.instanceType
         value: secret/hub/m5.xlarge
+
       - name: clusterset.clusters.1.name
         value: aws-cl2
       - name: clusterset.clusters.1.clusterGroupLabel

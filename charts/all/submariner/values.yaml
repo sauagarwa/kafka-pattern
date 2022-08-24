@@ -12,16 +12,16 @@ vault:
 clusterset:
   name: clusterset1
   clusters:
-  - name: cluster1
-    provider: gcloud
-    clusterGroupLabel: region-one
-    tokenPath: secret/hub/gcloud-cluster
-    serverPath: secret/hub/gcloud-cluster
-    cloudCredentialPath: secret/hub/gcloud-credentials
-  - name: cluster2
-    provider: aws
-    clusterGroupLabel: region-two
-    tokenPath: secret/hub/aws-cluster
-    serverPath: secret/hub/aws-cluster
-    instanceType: c5d.large
-    cloudCredentialPath: secret/hub/aws-credentials
+  # - name: cluster1
+  #   provider: gcloud
+  #   clusterGroupLabel: region-one
+  #   tokenPath: secret/hub/gcloud-cluster
+  #   serverPath: secret/hub/gcloud-cluster
+  #   cloudCredentialPath: secret/hub/gcloud-credentials
+  # - name: cluster2
+  #   provider: aws
+  #   clusterGroupLabel: region-two
+  #   tokenPath: secret/hub/aws-cluster
+  #   serverPath: secret/hub/aws-cluster
+  #   instanceType: c5d.large
+  #   cloudCredentialPath: secret/hub/aws-credentials
