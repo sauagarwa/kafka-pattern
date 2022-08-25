@@ -100,7 +100,7 @@ clusterGroup:
       - name: clusterset.clusters.0.cloudCredentialPath
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.0.instanceType
-        value: secret/hub/m5.xlarge
+        value: m5.xlarge
 
       - name: clusterset.clusters.1.name
         value: aws-cl2
@@ -114,8 +114,8 @@ clusterGroup:
         value: aws
       - name: clusterset.clusters.1.cloudCredentialPath
         value: secret/hub/aws-cloud-creds
-      - name: clusterset.clusters.0.instanceType
-        value: secret/hub/m5.xlarge
+      - name: clusterset.clusters.1.instanceType
+        value: m5.xlarge
     
     submariner:
       name: submariner
@@ -128,7 +128,6 @@ clusterGroup:
         value: vault-backend
       - name: clusterset.name
         value: submariner
-        
       - name: clusterset.clusters.0.name
         value: aws-cl1
       - name: clusterset.clusters.0.clusterGroupLabel
@@ -142,8 +141,7 @@ clusterGroup:
       - name: clusterset.clusters.0.cloudCredentialPath
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.0.instanceType
-        value: secret/hub/m5.xlarge
-
+        value: m5.xlarge
       - name: clusterset.clusters.1.name
         value: aws-cl2
       - name: clusterset.clusters.1.clusterGroupLabel
@@ -156,8 +154,8 @@ clusterGroup:
         value: aws
       - name: clusterset.clusters.1.cloudCredentialPath
         value: secret/hub/aws-cloud-creds
-      - name: clusterset.clusters.0.instanceType
-        value: secret/hub/m5.xlarge
+      - name: clusterset.clusters.1.instanceType
+        value: m5.xlarge
       
 
 
