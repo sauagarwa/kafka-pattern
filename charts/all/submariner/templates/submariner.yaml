@@ -9,7 +9,7 @@ metadata:
   namespace:  {{ .name }}
 spec:
   installNamespace: submariner-operator
-{{ if eq .provider "aws" }}
+{{- if eq .provider "aws" }}
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
@@ -48,9 +48,9 @@ spec:
   cableDriver: libreswan
   credentialsSecret:
     name: {{ .name }}-aws-creds
-{{ end }}
+{{- end }}
 
-{{ if eq .provider "gcloud" }}
+{{- if eq .provider "gcloud" }}
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret

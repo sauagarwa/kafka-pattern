@@ -1,0 +1,19 @@
+vault:
+  clusterSecretStoreName: vault-backend
+
+provider: aws
+namespaces:
+  - cockroachdb-aws-cl1
+  - cockroachdb-aws-cl2
+replicas: 3
+resources:
+  requests:
+    cpu: "2"
+    memory: "8Gi"
+  limits:
+    cpu: "2"
+    memory: "8Gi"
+
+
+
+

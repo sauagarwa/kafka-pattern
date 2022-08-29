@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-cockroachDb
+spec:
+  template:
+    spec:
+      containers:
+      - name: init-cockroachDb
+        image: 'bitnami/kubectl'
+        command:
+          - /bin/bash
+        args:
+          - '-c'
+          - >-
+            while [ "$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[*].status.containerStatuses[0].ready}')" != "true" ]; do
+              kubectl get pods 
+              sleep 5
+              echo "Waiting for Broker to be ready."
+            done
+            kubectl exec --namespace <cluster-namespace> -it cockroachdb-0 -- /cockroach/cockroach init --certs-dir=/cockroach/cockroach-certs
+      restartPolicy: Never
+  backoffLimit: 4

@@ -210,6 +210,14 @@ clusterGroup:
       clusterSelector:
         matchLabels:
           clusterGroup: region-one
+    region-two:
+      name: region-two
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      clusterSelector:
+        matchLabels:
+          clusterGroup: region-two
 
 #  To have apps in multiple flavors, use namespaces and use helm overrides as appropriate
 #

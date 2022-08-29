@@ -5,12 +5,12 @@ global:
     installPlanApproval: Automatic
 
 clusterGroup:
-  name: region-one
+  name: region-two
   isHubCluster: false
 
   namespaces:
   - amq-streams
-  - cockroachdb-region-one
+  - cockroachdb-region-two
       # - config-demo
 
   subscriptions:
@@ -30,7 +30,7 @@ clusterGroup:
     path: charts/all/kafka
 
   - name: cockroachdb
-    namespace: cockroachdb-region-one
+    namespace: cockroachdb-region-two
     project: cockroachdb
     path: charts/all/cockroachdb
     overrides:
