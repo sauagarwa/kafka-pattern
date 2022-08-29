@@ -1,5 +1,3 @@
-{{- if eq .Values.provider "aws" }}
----
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -369,4 +367,3 @@ spec:
       resources:
         requests:
           storage: 100Gi
-{{- end }}
