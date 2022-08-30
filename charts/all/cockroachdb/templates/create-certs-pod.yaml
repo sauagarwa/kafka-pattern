@@ -124,7 +124,7 @@ spec:
       - sh
       - -c
       - |
-        oc create secret generic cockroachdb.node --from-file=certs --namespace {{ .Release.Namespace }}
+        oc create secret generic cockroachdb.node --from-file=/var/run/secrets/certs --namespace {{ .Release.Namespace }}
         
   containers:
   - command:
