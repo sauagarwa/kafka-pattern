@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pods-termination-grace-period-seconds
+  name: create-certs
 spec:
   initContainers:
   - name: create-ca-cert
