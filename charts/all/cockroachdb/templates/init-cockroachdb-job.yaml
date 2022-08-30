@@ -9,7 +9,7 @@ spec:
       containers:
       - name: init-cockroachdb
         image: 'bitnami/kubectl'
-         command:
+        command:
           - sh
           - -c
           - |
