@@ -1,12 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: init-cockroachDb
+  name: init-cockroachdb
 spec:
   template:
     spec:
       containers:
-      - name: init-cockroachDb
+      - name: init-cockroachdb
         image: 'bitnami/kubectl'
         command:
           - /bin/bash

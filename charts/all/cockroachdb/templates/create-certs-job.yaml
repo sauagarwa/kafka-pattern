@@ -87,7 +87,7 @@ spec:
             kubectl create secret generic cockroachdb.node --from-file=certs --namespace {{ .Values.namespace }}
             
       containers:
-      - name: create-certs-cockroachDb
+      - name: create-certs
         image: 'bitnami/kubectl'
         command:
         - sh
