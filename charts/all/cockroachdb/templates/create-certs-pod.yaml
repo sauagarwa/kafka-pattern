@@ -90,6 +90,8 @@ spec:
       - sh
       - -c
       - |
+        oc delete secret cockroachdb.client.root || true
+        oc delete secret cockroachdb.node || true
         oc create secret generic cockroachdb.client.root --from-file=/var/run/secrets/certs --namespace {{ .Release.Namespace }}
 
   - name: create-node-cert
