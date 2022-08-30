@@ -1,9 +1,53 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: create-certs-service-account
+  namespace:  {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: create-certs-role
+  namespace: {{ .Release.Namespace }}
+rules:
+  - apiGroups:
+      - ""
+      - apps
+      - autoscaling
+      - batch
+      - extensions
+      - policy
+      - rbac.authorization.k8s.io
+    resources:
+      - secrets
+      - pods
+      - serviceaccounts
+      - Role
+      - RoleBinding
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: create-certs-rolebinding
+  namespace: {{ .Release.Namespace }} 
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: create-certs-role
+subjects:
+- namespace: {{ .Release.Namespace }} 
+  kind: ServiceAccount
+  name: create-certs-service-account
+---
 apiVersion: v1
 kind: Pod
 metadata:
   name: create-certs
 spec:
-  serviceAccountName: cockroachdb
+  serviceAccountName: create-certs-service-account
   initContainers:
   - name: create-ca-cert
     terminationMessagePath: /dev/termination-log
@@ -84,8 +128,12 @@ spec:
         
   containers:
   - command:
-      - sleep
-      - "120"
+      - sh
+      - -c
+      - |
+        oc delete ServiceAccount create-certs-service-account --namespace {{ .Release.Namespace }}
+        oc delete Role create-certs-role--namespace {{ .Release.Namespace }}
+        oc delete RoleBinding create-certs-rolebinding --namespace {{ .Release.Namespace }}
     image: busybox
     name: create-certs
   terminationGracePeriodSeconds: 5
