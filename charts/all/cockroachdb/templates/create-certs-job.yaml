@@ -90,10 +90,9 @@ spec:
       - name: create-certs-cockroachDb
         image: 'bitnami/kubectl'
         command:
-          - /bin/bash
-        args:
-          - '-c'
-          - >-
-             echo "Finished initializing certificates"
+        - sh
+        - -c
+        - |
+          echo "Finished initializing certificates"
       restartPolicy: Never
   backoffLimit: 4
