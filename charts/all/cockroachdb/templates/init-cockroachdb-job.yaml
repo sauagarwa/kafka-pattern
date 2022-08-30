@@ -18,6 +18,6 @@ spec:
               sleep 5
               echo "Waiting for Broker to be ready."
             done
-            kubectl exec --namespace <cluster-namespace> -it cockroachdb-0 -- /cockroach/cockroach init --certs-dir=/cockroach/cockroach-certs
+            kubectl exec --namespace {{ .Release.Namespace }} -it cockroachdb-0 -- /cockroach/cockroach init --certs-dir=/cockroach/cockroach-certs
       restartPolicy: Never
   backoffLimit: 4

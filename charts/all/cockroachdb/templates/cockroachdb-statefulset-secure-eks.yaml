@@ -141,7 +141,7 @@ kind: StatefulSet
 metadata:
   name: cockroachdb
   # TODO: Use this field to specify a namespace other than "default" in which to deploy CockroachDB (e.g., us-east-1).
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   serviceName: "cockroachdb"
   replicas: {{ .Values.replicas }}
@@ -168,82 +168,6 @@ spec:
               topologyKey: kubernetes.io/hostname
       # This init container is used to determine the availability zones of the Cockroach pods. The AZs are used to define --locality when starting Cockroach nodes.
       initContainers:
-      # - name: create-ca-cert
-      #   terminationMessagePath: /dev/termination-log
-      #   resources: {}
-      #   imagePullPolicy: Always
-      #   volumeMounts:
-      #     - name: certs-volume
-      #       mountPath: /var/run/secrets/certs
-      #     - name: my-safe-directory-volume
-      #       mountPath: /var/run/secrets/my-safe-directory
-      #   terminationMessagePolicy: File
-      #   image: 'cockroachdb/cockroach'
-      #   command:
-      #     - /bin/bash
-      #   args:
-      #     - '-c'
-      #     - >-
-      #       cockroach cert create-ca --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/certs/ca.key &&
-      #       cockroach cert create-client root --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/certs/ca.key
-      
-      # - name: create-ca-secret
-      #   terminationMessagePath: /dev/termination-log
-      #   resources: {}
-      #   imagePullPolicy: Always
-      #   volumeMounts:
-      #     - name: certs-volume
-      #       mountPath: /var/run/secrets/certs
-      #     - name: my-safe-directory-volume
-      #       mountPath: /var/run/secrets/my-safe-directory
-      #   terminationMessagePolicy: File
-      #   image: 'bitnami/kubectl'
-      #   command:
-      #     - /bin/bash
-      #   args:
-      #     - '-c'
-      #     - >-
-      #       kubectl create secret generic cockroachdb.client.root --from-file=/var/run/secrets/certs --namespace {{ .Values.namespace }}
-
-      # - name: create-node-cert
-      #   terminationMessagePath: /dev/termination-log
-      #   resources: {}
-      #   imagePullPolicy: Always
-      #   volumeMounts:
-      #     - name: certs-volume
-      #       mountPath: /var/run/secrets/certs
-      #     - name: my-safe-directory-volume
-      #       mountPath: /var/run/secrets/my-safe-directory
-      #   terminationMessagePolicy: File
-      #   image: 'cockroachdb/cockroach:v22.1.6'
-      #   command:
-      #     - /bin/bash
-      #   args:
-      #     - '-c'
-      #     - >-
-      #       cockroach cert create-node localhost 127.0.0.1 cockroachdb-public 
-      #       cockroachdb-public.{{ .Values.namespace }} cockroachdb-public.{{ .Values.namespace }}.svc.cluster.local
-      #       *.cockroachdb *.cockroachdb.{{ .Values.namespace }} *.cockroachdb.{{ .Values.namespace }}.svc.cluster.local
-      #       --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/my-safe-directory/ca.key
-      
-      # - name: create-node-secret
-      #   terminationMessagePath: /dev/termination-log
-      #   resources: {}
-      #   imagePullPolicy: Always
-      #   volumeMounts:
-      #     - name: certs-volume
-      #       mountPath: /var/run/secrets/certs
-      #     - name: my-safe-directory-volume
-      #       mountPath: /var/run/secrets/my-safe-directory
-      #   terminationMessagePolicy: File
-      #   image: 'bitnami/kubectl'
-      #   command:
-      #     - /bin/bash
-      #   args:
-      #     - '-c'
-      #     - >-
-      #       kubectl create secret generic cockroachdb.node --from-file=certs --namespace {{ .Values.namespace }}
-
       - name: locality-container
         image: byrnedo/alpine-curl:0.1
         imagePullPolicy: IfNotPresent
