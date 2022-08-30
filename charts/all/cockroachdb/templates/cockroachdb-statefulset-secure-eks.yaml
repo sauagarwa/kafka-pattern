@@ -242,9 +242,9 @@ spec:
             k=0;
             {{- $namespaces := $.Values.namespaces }}
             {{ range $i, $e := until ( .Values.replicas | int ) }}
-            echo " i = $i ";
+            echo " i = {{$i}} ";
             {{- range $namespaces }}
-            JOIN_LIST[k]="cockroachdb-$i.cockroachdb.{{ . }}";
+            JOIN_LIST[k]="cockroachdb-{{$i}}.cockroachdb.{{ . }}";
             {{end}}
             k=$((k+1));
             {{end}}
