@@ -240,7 +240,8 @@ spec:
           - |
             function join { local IFS="$1"; shift; echo "$*"; };
             k=0;
-            {{- $namespaces := $.Values.namespaces }}
+            {{- $namespaces := .Values.namespaces }}
+            echo "namespaces = {{$namespaces}} "
             {{ range $i, $e := until ( .Values.replicas | int ) }}
             echo " i = {{$i}} ";
             {{- range $namespaces }}
