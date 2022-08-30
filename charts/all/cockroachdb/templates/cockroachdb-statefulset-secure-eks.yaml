@@ -239,36 +239,31 @@ spec:
           - "-ecx"
           # The use of qualified `hostname -f` is crucial:
           # Other nodes aren't able to look up the unqualified hostname.
-          - exec
-            function join { local IFS="$1"; shift; echo "$*"; }
-            k=0
+          - |
+            function join { local IFS="$1"; shift; echo "$*"; };
+            k=0;
             {{- $namespaces := $.Values.namespaces }}
             {{ range $i, $e := until ( .Values.replicas | int ) }}
             {{- range $namespaces }}
-            JOIN_LIST[k]="cockroachdb-$i.cockroachdb.{{ . }}"
+            JOIN_LIST[k]="cockroachdb-$i.cockroachdb.{{ . }}";
             {{end}}
-            k=$((k+1))
+            k=$((k+1));
             {{end}}
-            JOIN_LIST=$(join , ${JOIN_LIST[@]})
-            echo $JOIN_LIST
-            /cockroach/cockroach
-            start
-            --logtostderr
-            --certs-dir /cockroach/cockroach-certs
-            --advertise-host $(hostname -f)
-            --http-addr 0.0.0.0
-            --join $JOIN_LIST
-            --locality=region={{ .Values.namespace }},az=$(cat /etc/cockroach-env/zone),dns=$(hostname -f)
-            --cache $(expr $MEMORY_LIMIT_MIB / 4)MiB
+            JOIN_LIST=$(join , ${JOIN_LIST[@]});
+            echo $JOIN_LIST;
+            /cockroach/cockroach start \
+            --logtostderr \
+            --certs-dir /cockroach/cockroach-certs \
+            --advertise-host $(hostname -f) \
+            --http-addr 0.0.0.0 \
+            --join $JOIN_LIST \
+            --locality=region={{ .Values.namespace }},az=$(cat /etc/cockroach-env/zone),dns=$(hostname -f) \
+            --cache $(expr $MEMORY_LIMIT_MIB / 4)MiB \
             --max-sql-memory $(expr $MEMORY_LIMIT_MIB / 4)MiB
       # No pre-stop hook is required, a SIGTERM plus some time is all that's
       # needed for graceful shutdown of a node.
       terminationGracePeriodSeconds: 60
       volumes:
-      - name: certs-volume
-        emptyDir: {}
-      - name: my-safe-directory-volume
-        emptyDir: {}
       - name: datadir
         persistentVolumeClaim:
           claimName: datadir

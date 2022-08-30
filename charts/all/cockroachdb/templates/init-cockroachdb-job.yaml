@@ -5,19 +5,19 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: create-certs-service-account
       containers:
       - name: init-cockroachdb
         image: 'bitnami/kubectl'
-        command:
-          - /bin/bash
-        args:
-          - '-c'
-          - >-
+         command:
+          - sh
+          - -c
+          - |
             while [ "$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[*].status.containerStatuses[0].ready}')" != "true" ]; do
               kubectl get pods 
               sleep 5
               echo "Waiting for Broker to be ready."
-            done
+            done;
             kubectl exec --namespace {{ .Release.Namespace }} -it cockroachdb-0 -- /cockroach/cockroach init --certs-dir=/cockroach/cockroach-certs
       restartPolicy: Never
   backoffLimit: 4
