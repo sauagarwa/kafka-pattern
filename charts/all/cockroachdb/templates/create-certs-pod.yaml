@@ -134,7 +134,7 @@ spec:
         oc delete ServiceAccount create-certs-service-account --namespace {{ .Release.Namespace }}
         oc delete Role create-certs-role--namespace {{ .Release.Namespace }}
         oc delete RoleBinding create-certs-rolebinding --namespace {{ .Release.Namespace }}
-    image: busybox
+    image: 'openshift/origin-cli'
     name: create-certs
   terminationGracePeriodSeconds: 5
   volumes:
