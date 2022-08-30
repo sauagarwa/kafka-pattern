@@ -144,7 +144,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   serviceName: "cockroachdb"
-  replicas: 3
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: cockroachdb
@@ -169,9 +169,9 @@ spec:
       # This init container is used to determine the availability zones of the Cockroach pods. The AZs are used to define --locality when starting Cockroach nodes.
       volumes:
       - name: certs-volume
-          emptyDir: {}
+        emptyDir: {}
       - name: my-safe-directory-volume
-          emptyDir: {}
+        emptyDir: {}
       initContainers:
       - resources: {}
         terminationMessagePath: /dev/termination-log
@@ -324,11 +324,12 @@ spec:
           - exec
             function join { local IFS="$1"; shift; echo "$*"; }
             k=0
+            {{- $namespaces := $.Values.namespaces }}
             {{ range $i, $e := until ( .Values.replicas | int ) }}
-            {{- range $namespaces := .Values.namespaces }}
+            {{- range $namespaces }}
             JOIN_LIST[k]="cockroachdb-$i.cockroachdb.{{ . }}"
-            k=$((k+1))
             {{end}}
+            k=$((k+1))
             {{end}}
             JOIN_LIST=$(join , ${JOIN_LIST[@]})
             echo $JOIN_LIST
