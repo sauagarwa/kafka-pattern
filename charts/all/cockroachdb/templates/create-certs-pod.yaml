@@ -26,7 +26,6 @@ rules:
       - Role
       - RoleBinding
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -133,7 +132,7 @@ spec:
       - sh
       - -c
       - |
-        oc delete RoleBinding create-certs-rolebinding --namespace {{ .Release.Namespace }}
+        sleep 20
     image: 'openshift/origin-cli'
     name: create-certs
   terminationGracePeriodSeconds: 5
