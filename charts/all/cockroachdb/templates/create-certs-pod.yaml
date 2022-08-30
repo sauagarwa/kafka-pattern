@@ -3,6 +3,7 @@ kind: Pod
 metadata:
   name: create-certs
 spec:
+  serviceAccountName: cockroachdb
   initContainers:
   - name: create-ca-cert
     terminationMessagePath: /dev/termination-log
