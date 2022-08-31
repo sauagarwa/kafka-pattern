@@ -60,3 +60,23 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{/*
+generate the join list
+*/}}
+{{- define "cockroachdb.joinList" -}}
+{{- $val := "" }}
+{{- $namespaces := .Values.namespaces }}
+{{- $nodeCount := .Values.replicas | int}}
+{{- range $i, $e := until $nodeCount}}
+{{- range $namespaces }}
+{{- $namespace := . }}
+{{- $seg := printf "cockroachdb-%d.cockroachdb.%s" $i $namespace }}
+{{- $val = printf "%s,%s"  $val $seg}}
+{{- end}}
+{{- end}}
+{{-  $val | trimPrefix "," }}
+{{- end }}
+
+ 
