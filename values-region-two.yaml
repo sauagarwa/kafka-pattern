@@ -32,30 +32,31 @@ clusterGroup:
     namespace: cockroachdb-region-two
     project: cockroachdb
     path: charts/all/cockroachdb
+    overrides:
+    - name: provider
+      value: aws
+    - name: replicas
+      value: 3
+    - name: vault.clusterSecretStoreName
+      value: vault-backend
+    - name: clusterset.name
+      value: submariner
+    - name: clusterset.clusters.0.name
+      value: aws-cl2
+    - name: resources.requests.cpu
+      value: "1"
+    - name: resources.requests.memory
+      value: "2Gi"
+    - name: resources.limits.cpu
+      value: "1"
+    - name: resources.limits.memory
+      value: "2Gi"
+    - name: namespaces.0
+      value: cockroachdb-region-one
+    - name: namespaces.1
+      value: cockroachdb-region-two
     
-    # overrides:
-    # - name: provider
-    #   value: aws
-    # - name: replicas
-    #   value: 3
-    # - name: vault.clusterSecretStoreName
-    #   value: vault-backend
-    # - name: clusterset.name
-    #   value: submariner
-    # - name: clusterset.clusters.0.name
-    #   value: aws-cl1
-    # - name: resources.requests.cpu
-    #   value: "1"
-    # - name: resources.requests.memory
-    #   value: "2Gi"
-    # - name: resources.limits.cpu
-    #   value: "1"
-    # - name: resources.limits.memory
-    #   value: "2Gi"
-    # - name: namespaces.0
-    #   value: cockroachdb-region-one
-    # - name: namespaces.1
-    #   value: cockroachdb-region-two
+
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
