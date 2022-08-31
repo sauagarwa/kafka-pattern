@@ -222,6 +222,8 @@ spec:
         - name: cockroach-env
           mountPath: /etc/cockroach-env
         env:
+        - name: COCKROACH_SKIP_KEY_PERMISSION_CHECK
+          value: "true"
         - name: COCKROACH_CHANNEL
           value: kubernetes-multiregion
         - name: GOMAXPROCS
@@ -261,7 +263,7 @@ spec:
       - name: certs
         secret:
           secretName: cockroachdb.node
-          defaultMode: 600
+          defaultMode: 256
       - name: cockroach-env
         emptyDir: {}
   podManagementPolicy: Parallel
