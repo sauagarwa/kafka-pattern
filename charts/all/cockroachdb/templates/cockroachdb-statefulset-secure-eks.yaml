@@ -241,15 +241,12 @@ spec:
             function join { local IFS="$1"; shift; echo "$*"; };
             k=0;
             {{- $namespaces := .Values.namespaces }}
-            echo "namespaces = {{$namespaces}} "
             {{ range $i, $e := until ( .Values.replicas | int ) }}
-            echo " i = {{$i}} ";
             {{- range $namespaces }}
-            JOIN_LIST[k]="cockroachdb-{{$i}}.cockroachdb.{{ . }}";
+             JOIN_LIST[k]="cockroachdb-{{$i}}.cockroachdb.{{ . }}";
+             k=$((k+1));
             {{end}}
-            k=$((k+1));
             {{end}}
-
             JOIN_LIST=$(join , ${JOIN_LIST[@]});
             echo $JOIN_LIST;
 
@@ -264,7 +261,7 @@ spec:
       - name: certs
         secret:
           secretName: cockroachdb.node
-          defaultMode: 256
+          defaultMode: 600
       - name: cockroach-env
         emptyDir: {}
   podManagementPolicy: Parallel
