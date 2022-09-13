@@ -25,6 +25,7 @@ rules:
       - serviceaccounts
       - Role
       - RoleBinding
+      - nodes
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups: [""]
     resources: ["pods/exec"]
