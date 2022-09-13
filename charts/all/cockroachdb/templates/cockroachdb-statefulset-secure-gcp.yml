@@ -229,7 +229,7 @@ spec:
             start
             --logtostderr
             --certs-dir /cockroach/cockroach-certs
-            --advertise-host $(hostname).{{ item.0.name }}.cockroachdb.cockroachdb.svc.clusterset.local
+            --advertise-host $(hostname -f)
             --http-addr 0.0.0.0
             --join  "{{ template "cockroachdb.joinList" . }}"
             --locality=region={{ .Values.region }},zone={{ .Values.zone }},dns=$(hostname -f),cloud={{ .Values.provider }}

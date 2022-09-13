@@ -53,6 +53,10 @@ clusterGroup:
       value: cockroachdb-region-two
     - name: namespaces.2
       value: cockroachdb-region-three
+    - name: region
+      value: us-central1
+    - name: zone
+      value: us-central1-a
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
