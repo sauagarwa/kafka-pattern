@@ -14,6 +14,7 @@ clusterGroup:
   - clustersconfig
   - aws-cl1
   - aws-cl2
+  - gcp-cl2
   # - config-demo
 
   subscriptions:
@@ -33,8 +34,6 @@ clusterGroup:
   - hub
   - clustersconfig
   - submariner
-  
-  # - config-demo
 
   applications:
     acm:
@@ -86,7 +85,6 @@ clusterGroup:
         value: vault-backend
       - name: clusterset.name
         value: submariner
-
       - name: clusterset.clusters.0.name
         value: aws-cl1
       - name: clusterset.clusters.0.clusterGroupLabel
@@ -116,6 +114,21 @@ clusterGroup:
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.1.instanceType
         value: m5.xlarge
+
+      - name: clusterset.clusters.2.name
+        value: gcp-cl2
+      - name: clusterset.clusters.2.clusterGroupLabel
+        value: region-three
+      - name: clusterset.clusters.2.tokenPath
+        value: secret/hub/gcp-cl2
+      - name: clusterset.clusters.2.serverPath
+        value: secret/hub/gcp-cl2
+      - name: clusterset.clusters.2.provider
+        value: gcp
+      - name: clusterset.clusters.2.cloudCredentialPath
+        value: secret/hub/gcp-cl2-creds
+      - name: clusterset.clusters.2.instanceType
+        value: n2-standard-8
     
     submariner:
       name: submariner
@@ -142,6 +155,7 @@ clusterGroup:
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.0.instanceType
         value: m5.xlarge
+      
       - name: clusterset.clusters.1.name
         value: aws-cl2
       - name: clusterset.clusters.1.clusterGroupLabel
@@ -156,6 +170,21 @@ clusterGroup:
         value: secret/hub/aws-cloud-creds
       - name: clusterset.clusters.1.instanceType
         value: m5.xlarge
+
+      - name: clusterset.clusters.2.name
+        value: gcp-cl2
+      - name: clusterset.clusters.2.clusterGroupLabel
+        value: region-three
+      - name: clusterset.clusters.2.tokenPath
+        value: secret/hub/gcp-cl2
+      - name: clusterset.clusters.2.serverPath
+        value: secret/hub/gcp-cl2
+      - name: clusterset.clusters.2.provider
+        value: gcp
+      - name: clusterset.clusters.2.cloudCredentialPath
+        value: secret/hub/gcp-cl2-creds
+      - name: clusterset.clusters.2.instanceType
+        value: n2-standard-8
       
 
 
@@ -218,6 +247,14 @@ clusterGroup:
       clusterSelector:
         matchLabels:
           clusterGroup: region-two
+    region-three:
+      name: region-three
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      clusterSelector:
+        matchLabels:
+          clusterGroup: region-three
 
 #  To have apps in multiple flavors, use namespaces and use helm overrides as appropriate
 #

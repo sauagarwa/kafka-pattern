@@ -1,5 +1,5 @@
 # For gcp
-# key of gcloud-credentials is content osServiceAccount.json 
+# key of gcp-credentials is content osServiceAccount.json 
 # vault push secret files option is used to push  osServiceAccount.json 
 # and the key is created as content
 
@@ -13,11 +13,11 @@ clusterset:
   name: clusterset1
   clusters:
   # - name: cluster1
-  #   provider: gcloud
+  #   provider: gcp
   #   clusterGroupLabel: region-one
-  #   tokenPath: secret/hub/gcloud-cluster
-  #   serverPath: secret/hub/gcloud-cluster
-  #   cloudCredentialPath: secret/hub/gcloud-credentials
+  #   tokenPath: secret/hub/gcp-cluster
+  #   serverPath: secret/hub/gcp-cluster
+  #   cloudCredentialPath: secret/hub/gcp-credentials
   # - name: cluster2
   #   provider: aws
   #   clusterGroupLabel: region-two

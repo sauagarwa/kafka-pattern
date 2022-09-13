@@ -13,10 +13,10 @@ clusterGroup:
   - cockroachdb-region-two
 
   subscriptions:
-  - name: amq-streams
-    namespace: amq-streams
-    channel: amq-streams-2.x
-    csv: amqstreams.v2.0.1-0
+  # - name: amq-streams
+  #   namespace: amq-streams
+  #   channel: amq-streams-2.x
+  #   csv: amqstreams.v2.0.1-0
 
   projects:
   - kafka
@@ -39,10 +39,6 @@ clusterGroup:
       value: 3
     - name: vault.clusterSecretStoreName
       value: vault-backend
-    - name: clusterset.name
-      value: submariner
-    - name: clusterset.clusters.0.name
-      value: aws-cl2
     - name: resources.requests.cpu
       value: "1"
     - name: resources.requests.memory
@@ -55,6 +51,8 @@ clusterGroup:
       value: cockroachdb-region-one
     - name: namespaces.1
       value: cockroachdb-region-two
+    - name: namespaces.2
+      value: cockroachdb-region-three
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm

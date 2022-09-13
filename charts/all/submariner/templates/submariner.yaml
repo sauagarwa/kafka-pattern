@@ -50,7 +50,7 @@ spec:
     name: {{ .name }}-aws-creds
 {{- end }}
 
-{{- if eq .provider "gcloud" }}
+{{- if eq .provider "gcp" }}
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
