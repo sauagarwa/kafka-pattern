@@ -34,4 +34,6 @@ spec:
 {{- if eq .Values.main.options.syncPolicy "Automatic" }}
   syncPolicy:
     automated: {}
+    retry:
+      limit: 100
 {{- end }}
