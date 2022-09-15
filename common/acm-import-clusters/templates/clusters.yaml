@@ -47,11 +47,11 @@ spec:
   data:
   - secretKey: token
     remoteRef:
-      key: /secret/{{ $clustersetName }}/{{ .name }}
+      key: secret/{{ $clustersetName }}/{{ .name }}
       property: token
   - secretKey: server
     remoteRef:
-      key: /secret/{{ $clustersetName }}/{{ .name }}
+      key: secret/{{ $clustersetName }}/{{ .name }}
       property: server
 ---
 apiVersion: agent.open-cluster-management.io/v1
