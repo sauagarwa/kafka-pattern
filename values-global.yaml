@@ -1,6 +1,8 @@
 ---
 global:
   pattern: kafka-pattern
+  vault:
+    secretStoreName: vault-backend
 
   options:
     useCSV: false

@@ -235,7 +235,7 @@ spec:
             --advertise-host $(hostname -f)
             --http-addr 0.0.0.0
             --join  "{{ template "cockroachdb.joinList" . }}"
-            --locality=region=$region,zone=$zone,dns=$(hostname -f),cloud={{ .Values.provider }}
+            --locality=region={{ .Values.region }},zone={{ .Values.zone }},dns=$(hostname -f),cloud={{ .Values.provider }}
             --cache $(expr $MEMORY_LIMIT_MIB / 4)MiB
             --max-sql-memory $(expr $MEMORY_LIMIT_MIB / 4)MiB
       # No pre-stop hook is required, a SIGTERM plus some time is all that's
