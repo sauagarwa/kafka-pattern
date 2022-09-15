@@ -34,8 +34,8 @@ clusterGroup:
 
   projects:
   - hub
-  # - clustersconfig
-  # - submariner
+  - clustersconfig
+  - submariner
 
   applications:
     acm:
