@@ -6,31 +6,4 @@ global:
     secretStoreName: vault-backend
 
 clusterGroup:
-  autoImport: true
-  name: hub
-  submarinerAddon: true
   managedClusterGroups:
-    region-one:
-      name: region-one
-      helmOverrides:
-      - name: clusterGroup.isHubCluster
-        value: false
-      clusterSelector:
-        matchLabels:
-          clusterGroup: region-one
-    region-two:
-      name: region-two
-      helmOverrides:
-      - name: clusterGroup.isHubCluster
-        value: false
-      clusterSelector:
-        matchLabels:
-          clusterGroup: region-two
-    region-three:
-      name: region-three
-      helmOverrides:
-      - name: clusterGroup.isHubCluster
-        value: false
-      clusterSelector:
-        matchLabels:
-          clusterGroup: region-three
