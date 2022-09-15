@@ -54,6 +54,13 @@ clusterGroup:
         jsonPointers:
           - /spec/loggingCA
 
+    acm-import-clusters:
+      name:  acm-import-clusters
+      namespace: open-cluster-management
+      project: hub
+      path: common/acm-import-clusters
+      retry: 100
+
     vault:
       name: vault
       namespace: vault
