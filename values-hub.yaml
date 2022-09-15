@@ -11,6 +11,11 @@ clusterGroup:
   - open-cluster-management
   - vault
   - golang-external-secrets
+  - region-one
+  - region-two
+  - region-three
+  - submariner
+  - clusterconfig
   # - amq-streams
   # - submariner
   # - clustersconfig
