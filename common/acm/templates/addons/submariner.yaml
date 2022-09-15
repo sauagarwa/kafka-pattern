@@ -1,4 +1,4 @@
-{{- if .Values.clusterGroup.autoImport }}
+{{- if .Values.clusterGroup.submarinerAddon }}
 {{- $clustersetName := $.Values.clusterGroup.name }}
 {{- $clusterSecretStoreName := $.Values.global.vault.secretStoreName }}
 {{- range .Values.clusterGroup.managedClusterGroups }}
