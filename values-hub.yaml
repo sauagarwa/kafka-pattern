@@ -5,7 +5,7 @@ clusterGroup:
   # is fundamentally insecure
   insecureUnsealVaultInsideCluster: false
   autoImport: true
-  submarinerAddon: true
+  submarinerAddon: false
 
   namespaces:
   - open-cluster-management
