@@ -11,18 +11,7 @@ clusterGroup:
   - open-cluster-management
   - vault
   - golang-external-secrets
-  - region-one
-  - region-two
-  - region-three
   - submariner
-  - clusterconfig
-  # - amq-streams
-  # - submariner
-  # - clustersconfig
-  # - aws-cl1
-  # - aws-cl2
-  # - gcp-cl2
-  # - config-demo
 
   subscriptions:
     acm:
@@ -30,16 +19,9 @@ clusterGroup:
       namespace: open-cluster-management
       channel: release-2.5
       csv: advanced-cluster-management.v2.5.0
-    
-    # amq-streams:
-    #   name: amq-streams
-    #   namespace: amq-streams
-    #   channel: amq-streams-2.x
-    #   csv: amqstreams.v2.0.1-0
 
   projects:
   - hub
-  - clustersconfig
   - submariner
 
   applications:
@@ -59,6 +41,13 @@ clusterGroup:
       namespace: open-cluster-management
       project: hub
       path: common/acm-import-clusters
+      retry: 100
+
+    submariner:
+      name:  submariner
+      namespace: submariner
+      project: submariner
+      path: charts/all/submariner
       retry: 100
 
     vault:
@@ -88,144 +77,11 @@ clusterGroup:
       - name: server.image.tag
         value: "1.10.3-ubi"
 
-    # clustersconfig:
-    #   name: clustersconfig
-    #   namespace: clustersconfig
-    #   project: clustersconfig
-    #   path: charts/all/clustersconfig
-    #   retry: 100
-    #   overrides:
-    #   - name: vault.clusterSecretStoreName
-    #     value: vault-backend
-    #   - name: clusterset.name
-    #     value: submariner
-    #   - name: clusterset.clusters.0.name
-    #     value: aws-cl1
-    #   - name: clusterset.clusters.0.clusterGroupLabel
-    #     value: region-one
-    #   - name: clusterset.clusters.0.tokenPath
-    #     value: secret/hub/aws-cl1
-    #   - name: clusterset.clusters.0.serverPath
-    #     value: secret/hub/aws-cl1
-    #   - name: clusterset.clusters.0.provider
-    #     value: aws
-    #   - name: clusterset.clusters.0.cloudCredentialPath
-    #     value: secret/hub/aws-cloud-creds
-    #   - name: clusterset.clusters.0.instanceType
-    #     value: m5.xlarge
-
-    #   - name: clusterset.clusters.1.name
-    #     value: aws-cl2
-    #   - name: clusterset.clusters.1.clusterGroupLabel
-    #     value: region-two
-    #   - name: clusterset.clusters.1.tokenPath
-    #     value: secret/hub/aws-cl2
-    #   - name: clusterset.clusters.1.serverPath
-    #     value: secret/hub/aws-cl2
-    #   - name: clusterset.clusters.1.provider
-    #     value: aws
-    #   - name: clusterset.clusters.1.cloudCredentialPath
-    #     value: secret/hub/aws-cloud-creds
-    #   - name: clusterset.clusters.1.instanceType
-    #     value: m5.xlarge
-
-    #   - name: clusterset.clusters.2.name
-    #     value: gcp-cl2
-    #   - name: clusterset.clusters.2.clusterGroupLabel
-    #     value: region-three
-    #   - name: clusterset.clusters.2.tokenPath
-    #     value: secret/hub/gcp-cl2
-    #   - name: clusterset.clusters.2.serverPath
-    #     value: secret/hub/gcp-cl2
-    #   - name: clusterset.clusters.2.provider
-    #     value: gcp
-    #   - name: clusterset.clusters.2.cloudCredentialPath
-    #     value: secret/hub/gcp-cl2-creds
-    #   - name: clusterset.clusters.2.instanceType
-    #     value: n2-standard-8
-    
-    # submariner:
-    #   name: submariner
-    #   namespace: submariner
-    #   project: submariner
-    #   path: charts/all/submariner
-    #   retry: 100
-    #   overrides:
-    #   - name: vault.clusterSecretStoreName
-    #     value: vault-backend
-    #   - name: clusterset.name
-    #     value: submariner
-    #   - name: clusterset.clusters.0.name
-    #     value: aws-cl1
-    #   - name: clusterset.clusters.0.clusterGroupLabel
-    #     value: region-one
-    #   - name: clusterset.clusters.0.tokenPath
-    #     value: secret/hub/aws-cl1
-    #   - name: clusterset.clusters.0.serverPath
-    #     value: secret/hub/aws-cl1
-    #   - name: clusterset.clusters.0.provider
-    #     value: aws
-    #   - name: clusterset.clusters.0.cloudCredentialPath
-    #     value: secret/hub/aws-cloud-creds
-    #   - name: clusterset.clusters.0.instanceType
-    #     value: m5.xlarge
-      
-    #   - name: clusterset.clusters.1.name
-    #     value: aws-cl2
-    #   - name: clusterset.clusters.1.clusterGroupLabel
-    #     value: region-two
-    #   - name: clusterset.clusters.1.tokenPath
-    #     value: secret/hub/aws-cl2
-    #   - name: clusterset.clusters.1.serverPath
-    #     value: secret/hub/aws-cl2
-    #   - name: clusterset.clusters.1.provider
-    #     value: aws
-    #   - name: clusterset.clusters.1.cloudCredentialPath
-    #     value: secret/hub/aws-cloud-creds
-    #   - name: clusterset.clusters.1.instanceType
-    #     value: m5.xlarge
-
-    #   - name: clusterset.clusters.2.name
-    #     value: gcp-cl2
-    #   - name: clusterset.clusters.2.clusterGroupLabel
-    #     value: region-three
-    #   - name: clusterset.clusters.2.tokenPath
-    #     value: secret/hub/gcp-cl2
-    #   - name: clusterset.clusters.2.serverPath
-    #     value: secret/hub/gcp-cl2
-    #   - name: clusterset.clusters.2.provider
-    #     value: gcp
-    #   - name: clusterset.clusters.2.cloudCredentialPath
-    #     value: secret/hub/gcp-cl2-creds
-    #   - name: clusterset.clusters.2.instanceType
-    #     value: n2-standard-8
-      
-      # - name: clusterset.clusters.1.name
-      #   value: aws
-      # - name: clusterset.clusters.1.clusterGroupLabel
-      #   value: region-one
-      # - name: clusterset.clusters.1.tokenPath
-      #   value: secret/hub/aws-cluster
-      # - name: clusterset.clusters.1.serverPath
-      #   value: secret/hub/aws-cluster
-      # - name: clusterset.clusters.1.instanceType
-      #   value: c5n.metal
-      # - name: clusterset.clusters.1.provider
-      #   value: aws
-      # - name: clusterset.clusters.1.cloudCredentialPath
-      #   value: secret/hub/aws-credentials
-
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
       project: hub
       path: common/golang-external-secrets
-
-    # config-demo:
-    #   name: config-demo
-    #   namespace: config-demo
-    #   project: config-demo
-    #   path: charts/all/config-demo
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
