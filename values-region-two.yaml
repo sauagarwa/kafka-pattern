@@ -9,25 +9,14 @@ clusterGroup:
   isHubCluster: false
 
   namespaces:
-  - amq-streams
   - cockroachdb-region-two
 
   subscriptions:
-  # - name: amq-streams
-  #   namespace: amq-streams
-  #   channel: amq-streams-2.x
-  #   csv: amqstreams.v2.0.1-0
 
   projects:
-  - kafka
   - cockroachdb
 
   applications:
-  - name: amq-streams
-    namespace: amq-streams
-    project: kafka
-    path: charts/all/kafka
-
   - name: cockroachdb
     namespace: cockroachdb-region-two
     project: cockroachdb
