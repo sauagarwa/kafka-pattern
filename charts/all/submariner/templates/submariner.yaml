@@ -161,7 +161,7 @@ metadata:
   name: submariner-broker
   annotations:
     "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-weight": "11"
 ---
 apiVersion: submariner.io/v1alpha1
 kind: Broker
@@ -170,7 +170,7 @@ metadata:
   namespace: submariner-broker
   annotations:
     "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "2"
+    "helm.sh/hook-weight": "12"
 spec:
   globalnetEnabled: false
 {{- end }}
