@@ -3,32 +3,11 @@
 {{- $clusterSecretStoreName := $.Values.global.vault.secretStoreName }}
 {{- range .Values.clusterGroup.managedClusterGroups }}
 ---
-apiVersion: v1
-kind: Pod
-metadata:
-  namespace: {{ .name }}
-  name: verify-acm-cluster-import-{{ .name }}
-  annotations:
-    "helm.sh/hook": "pre-install"
-    "helm.sh/hook-weight": "-5"
-spec:
-  containers:
-  - name: verify-acm-cluster-import-container{{ .name }}
-    image: busybox
-    imagePullPolicy: IfNotPresent
-    command: ['sh', '-c', 'echo The pre-install hook is running && sleep 150' ]
-  restartPolicy: Never
-  terminationGracePeriodSeconds: 0
----
 apiVersion: addon.open-cluster-management.io/v1alpha1
 kind: ManagedClusterAddOn
 metadata:
   name: submariner
   namespace:  {{ .name }}
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "0"
-
 spec:
   installNamespace: submariner-operator
 
@@ -39,9 +18,6 @@ kind: ExternalSecret
 metadata:
   name: {{ .name }}-aws-creds
   namespace: {{ .name }}
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "3"
 spec:
   secretStoreRef:
     name: "{{ $clusterSecretStoreName }}"
@@ -59,31 +35,11 @@ spec:
       key: secret/{{ $clustersetName }}/{{ .name }}-cloud-creds
       property: aws_secret_access_key
 ---
-apiVersion: v1
-kind: Pod
-metadata:
-  namespace:  {{ .name }}
-  name: verify-cloud-creds-secret-{{ .name }}
-  annotations:
-    "helm.sh/hook": "pre-install"
-    "helm.sh/hook-weight": "4"
-spec:
-  containers:
-  - name: verify-cloud-creds-secret-container-{{ .name }}
-    image: busybox
-    imagePullPolicy: IfNotPresent
-    command: ['sh', '-c', 'echo The pre-install hook is running && sleep 30' ]
-  restartPolicy: Never
-  terminationGracePeriodSeconds: 0
----
 apiVersion: submarineraddon.open-cluster-management.io/v1alpha1
 kind: SubmarinerConfig
 metadata:
   name: submariner
   namespace:  {{ .name }}
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "5"
 spec:
   gatewayConfig:
     gateways: 1
@@ -95,7 +51,6 @@ spec:
   credentialsSecret:
     name: {{ .name }}-aws-creds
 {{- end }}
-
 {{- if eq .provider "gcp" }}
 ---
 apiVersion: external-secrets.io/v1alpha1
@@ -103,9 +58,6 @@ kind: ExternalSecret
 metadata:
   name: {{ .name }}-gcp-creds
   namespace: {{ .name }}
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "3"
 spec:
   secretStoreRef:
     name: "{{ $clusterSecretStoreName }}"
@@ -119,31 +71,11 @@ spec:
       key: secret/{{ $clustersetName }}/{{ .name }}-cloud-creds
       property: content
 ---
-apiVersion: v1
-kind: Pod
-metadata:
-  namespace:  {{ .name }}
-  name: verify-cloud-creds-secret-{{ .name }}
-  annotations:
-    "helm.sh/hook": "pre-install"
-    "helm.sh/hook-weight": "4"
-spec:
-  containers:
-  - name: verify-cloud-creds-secret-container-{{ .name }}
-    image: busybox
-    imagePullPolicy: IfNotPresent
-    command: ['sh', '-c', 'echo The pre-install hook is running && sleep 30' ]
-  restartPolicy: Never
-  terminationGracePeriodSeconds: 0
----
 apiVersion: submarineraddon.open-cluster-management.io/v1alpha1
 kind: SubmarinerConfig
 metadata:
   name: submariner
   namespace: {{ .name }}
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "5"
 spec:
   gatewayConfig:
     gateways: 1
@@ -155,22 +87,11 @@ spec:
 {{- end }}
 {{- end }}
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: submariner-broker
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "11"
----
 apiVersion: submariner.io/v1alpha1
 kind: Broker
 metadata:
   name: submariner-broker
-  namespace: submariner-broker
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "12"
+  namespace: {{ $clustersetName }}-broker
 spec:
   globalnetEnabled: false
 {{- end }}
