@@ -6,13 +6,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: verify-acm-cluster-import
+  namespace: {{ .name }}
+  name: verify-acm-cluster-import-{{ .name }}
   annotations:
     "helm.sh/hook": "pre-install"
     "helm.sh/hook-weight": "-5"
 spec:
   containers:
-  - name: verify-acm-cluster-import-container
+  - name: verify-acm-cluster-import-container{{ .name }}
     image: busybox
     imagePullPolicy: IfNotPresent
     command: ['sh', '-c', 'echo The pre-install hook is running && sleep 150' ]
@@ -61,13 +62,14 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: verify-cloud-creds-secret
+  namespace:  {{ .name }}
+  name: verify-cloud-creds-secret-{{ .name }}
   annotations:
     "helm.sh/hook": "pre-install"
     "helm.sh/hook-weight": "4"
 spec:
   containers:
-  - name: verify-cloud-creds-secret-container
+  - name: verify-cloud-creds-secret-container-{{ .name }}
     image: busybox
     imagePullPolicy: IfNotPresent
     command: ['sh', '-c', 'echo The pre-install hook is running && sleep 30' ]
@@ -120,13 +122,14 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: verify-cloud-creds-secret
+  namespace:  {{ .name }}
+  name: verify-cloud-creds-secret-{{ .name }}
   annotations:
     "helm.sh/hook": "pre-install"
     "helm.sh/hook-weight": "4"
 spec:
   containers:
-  - name: verify-cloud-creds-secret-container
+  - name: verify-cloud-creds-secret-container-{{ .name }}
     image: busybox
     imagePullPolicy: IfNotPresent
     command: ['sh', '-c', 'echo The pre-install hook is running && sleep 30' ]
