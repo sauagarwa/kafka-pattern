@@ -87,6 +87,11 @@ spec:
 {{- end }}
 {{- end }}
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: submariner-broker
+---
 apiVersion: submariner.io/v1alpha1
 kind: Broker
 metadata:
