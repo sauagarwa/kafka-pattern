@@ -6,10 +6,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-   name: verify-acm-cluster-import
-   annotations:
-       "helm.sh/hook": "pre-install"
-        "helm.sh/hook-weight": "-5"
+  name: verify-acm-cluster-import
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-weight": "-5"
 spec:
   containers:
   - name: verify-acm-cluster-import-container
@@ -80,10 +80,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-   name: verify-cloud-creds-secret
-   annotations:
-       "helm.sh/hook": "pre-install"
-        "helm.sh/hook-weight": "4"
+  name: verify-cloud-creds-secret
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-weight": "4"
 spec:
   containers:
   - name: verify-cloud-creds-secret-container
@@ -139,10 +139,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-   name: verify-cloud-creds-secret
-   annotations:
-       "helm.sh/hook": "pre-install"
-        "helm.sh/hook-weight": "4"
+  name: verify-cloud-creds-secret
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-weight": "4"
 spec:
   containers:
   - name: verify-cloud-creds-secret-container
