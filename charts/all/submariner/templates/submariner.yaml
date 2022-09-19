@@ -30,26 +30,7 @@ metadata:
 
 spec:
   installNamespace: submariner-operator
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: submariner-broker
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "1"
----
-apiVersion: submariner.io/v1alpha1
-kind: Broker
-metadata:
-  name: submariner-broker
-  namespace: submariner-broker
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "2"
-spec:
-  globalnetEnabled: false
-{{- end }}
+
 {{- if eq .provider "aws" }}
 ---
 apiVersion: external-secrets.io/v1alpha1
@@ -169,6 +150,26 @@ spec:
   credentialsSecret:
     name: {{ .name }}-gcp-creds
 {{- end }}
+{{- end }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: submariner-broker
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "1"
+---
+apiVersion: submariner.io/v1alpha1
+kind: Broker
+metadata:
+  name: submariner-broker
+  namespace: submariner-broker
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "2"
+spec:
+  globalnetEnabled: false
 {{- end }}
 
 
