@@ -7,3 +7,4 @@ clusterGroup:
   name: hub
   submarinerAddon: true
   managedClusterGroups:
+ 

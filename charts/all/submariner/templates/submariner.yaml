@@ -174,5 +174,3 @@ metadata:
 spec:
   globalnetEnabled: false
 {{- end }}
-
-
