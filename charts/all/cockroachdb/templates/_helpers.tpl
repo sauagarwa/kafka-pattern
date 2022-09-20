@@ -67,16 +67,15 @@ generate the join list
 */}}
 {{- define "cockroachdb.joinList" -}}
 {{- $val := "" }}
-{{- $namespaces := .Values.namespaces }}
+{{- $clusters := .Values.clusters }}
 {{- $nodeCount := .Values.replicas | int}}
 {{- range $i, $e := until $nodeCount}}
-{{- range $namespaces }}
-{{- $namespace := . }}
-{{- $seg := printf "cockroachdb-%d.cockroachdb.%s" $i $namespace }}
+{{- range $clusters }}
+{{- $cluster := . }}
+{{- $seg := printf "cockroachdb-%d.%s.cockroachdb.cockroachdb.svc.clusterset.local" $i $cluster }}
 {{- $val = printf "%s,%s"  $val $seg}}
 {{- end}}
 {{- end}}
 {{-  $val | trimPrefix "," }}
 {{- end }}
 
- 
