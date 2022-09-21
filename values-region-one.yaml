@@ -10,6 +10,7 @@ clusterGroup:
 
   namespaces:
   - cockroachdb
+  - golang-external-secrets
 
   subscriptions:
 
