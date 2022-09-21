@@ -113,7 +113,7 @@ spec:
       - sh
       - -c
       - |
-        cockroach cert create-node localhost 127.0.0.1 cockroachdb-public cockroachdb-public.cockroachdb cockroachdb-public.cockroachdb.svc.cluster.local "*.{{ .Values.clusterName }}.cockroachdb.cockroachdb.svc.clusterset.local" "*.cockroachdb" "*.cockroachdb.cockroachdb" "*.cockroachdb.cockroachdb.svc.cluster.local" --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/my-safe-directory/ca.key
+        cockroach cert create-node localhost 127.0.0.1 cockroachdb-public cockroachdb-public.cockroachdb cockroachdb-public.cockroachdb.svc.cluster.local "*.cockroachdb.cockroachdb.svc.clusterset.local" "*.cockroachdb" "*.cockroachdb.cockroachdb" "*.cockroachdb.cockroachdb.svc.cluster.local" --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/my-safe-directory/ca.key
   
   - name: create-node-secret
     terminationMessagePath: /dev/termination-log
