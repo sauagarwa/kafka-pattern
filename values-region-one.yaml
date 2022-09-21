@@ -16,13 +16,13 @@ clusterGroup:
 
   projects:
   - cockroachdb
-  - hub
+  - managed
 
   applications:
-  - name: golang-external-secrets
+  - name: golang-external-secret-sync
     namespace: golang-external-secrets
-    project: hub
-    path: common/golang-external-secrets
+    project: managed
+    path: charts/all/golang-external-secret-sync
   # - name: cockroachdb
   #   namespace: cockroachdb
   #   project: cockroachdb
