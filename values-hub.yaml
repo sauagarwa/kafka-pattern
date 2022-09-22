@@ -28,6 +28,12 @@ clusterGroup:
   - submariner
 
   applications:
+    golang-external-secret-sync:
+      name: golang-external-secret-sync
+      namespace: golang-external-secrets
+      project: hub
+      path: charts/all/golang-external-secret-sync
+
     acm:
       name: acm
       namespace: open-cluster-management

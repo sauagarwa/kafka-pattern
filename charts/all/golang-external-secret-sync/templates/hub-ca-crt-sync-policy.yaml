@@ -1,7 +1,8 @@
+{{- if .Values.clusterGroup.isHubCluster }}
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: golang-external-secrets-policy
+  name: hub-ca-crt-policy
 spec:
   remediationAction: enforce
   disabled: false
@@ -10,7 +11,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: golang-external-secrets
+          name: hub-ca-crt
           annotations:
             apps.open-cluster-management.io/deployables: "secret"
         spec:
@@ -22,25 +23,24 @@ spec:
           object-templates:
             - complianceType: mustonlyhave
               objectDefinition:
-                kind: Secret
-                type: Opaque
+                kind: ConfigMap
                 metadata:
-                  name: vault-token
+                  name: hub-root-ca.crt
                   namespace: golang-external-secrets
                 apiVersion: v1
                 data:
-                  token: '{{ `{{hub index (lookup "v1" "Secret" "golang-external-secrets" "golang-external-secrets").data "token" hub}}` }}'
+                  ca.crt: '{{ `{{hub index (lookup "v1" "ConfigMap" "golang-external-secrets" "kube-root-ca.crt").data "ca.crt" hub}}` }}'
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: golang-external-secrets-placement-binding
+  name: hub-ca-crt-placement-binding
 placementRef:
-  name: golang-external-secrets-placement
+  name: hub-ca-crt-placement
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-  - name: golang-external-secrets-policy
+  - name: hub-ca-crt-policy
     kind: Policy
     apiGroup: policy.open-cluster-management.io
 ---
@@ -48,9 +48,10 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: golang-external-secrets-placement
+  name: hub-ca-crt-placement
 spec:
   # This will go to all clusters
   clusterConditions:
     - status: 'True'
       type: ManagedClusterConditionAvailable
+{{- end }}
