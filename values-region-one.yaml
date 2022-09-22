@@ -23,6 +23,8 @@ clusterGroup:
     namespace: golang-external-secrets
     project: managed
     path: charts/all/golang-external-secret-sync
+    retry: 100
+    
   # - name: cockroachdb
   #   namespace: cockroachdb
   #   project: cockroachdb

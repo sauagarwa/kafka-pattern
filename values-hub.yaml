@@ -33,6 +33,7 @@ clusterGroup:
       namespace: golang-external-secrets
       project: hub
       path: charts/all/golang-external-secret-sync
+      retry: 100
 
     acm:
       name: acm
