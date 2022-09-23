@@ -58,8 +58,10 @@ spec:
     resources: {}
     imagePullPolicy: Always
     volumeMounts:
-      - name: certs-volume
+      - name: certs-gen-volume
         mountPath: /var/run/secrets/certs
+      - name: certs-volume
+        mountPath: /var/run/secrets/ca-crt
       - name: my-safe-directory-volume
         mountPath: /var/run/secrets/my-safe-directory
     terminationMessagePolicy: File
@@ -68,11 +70,13 @@ spec:
       - sh
       - -c
       - |
-        echo "Creating certs in the directory /var/run/secrets/"
-        cockroach cert create-ca --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/my-safe-directory/ca.key
+        echo " certs directory "
+        ls -al /var/run/secrets/certs
+        echo " safe directory "
+        ls -al /var/run/secrets/my-safe-directory
+        cp /var/run/secrets/ca-crt/ca.crt /var/run/secrets/certs/ca.crt
         cockroach cert create-client root --certs-dir=/var/run/secrets/certs --ca-key=/var/run/secrets/my-safe-directory/ca.key
         chmod 640 /var/run/secrets/certs/*.*
-        chmod 640 /var/run/secrets/my-safe-directory/*.*
         echo " certs directory "
         ls -al /var/run/secrets/certs
         echo " safe directory "
@@ -84,8 +88,10 @@ spec:
     resources: {}
     imagePullPolicy: Always
     volumeMounts:
-      - name: certs-volume
+      - name: certs-gen-volume
         mountPath: /var/run/secrets/certs
+      - name: certs-volume
+        mountPath: /var/run/secrets/ca-crt
       - name: my-safe-directory-volume
         mountPath: /var/run/secrets/my-safe-directory
     terminationMessagePolicy: File
@@ -103,8 +109,10 @@ spec:
     resources: {}
     imagePullPolicy: Always
     volumeMounts:
-      - name: certs-volume
+      - name: certs-gen-volume
         mountPath: /var/run/secrets/certs
+      - name: certs-volume
+        mountPath: /var/run/secrets/ca-crt
       - name: my-safe-directory-volume
         mountPath: /var/run/secrets/my-safe-directory
     terminationMessagePolicy: File
@@ -120,8 +128,10 @@ spec:
     resources: {}
     imagePullPolicy: Always
     volumeMounts:
-      - name: certs-volume
+      - name: certs-gen-volume
         mountPath: /var/run/secrets/certs
+      - name: certs-volume
+        mountPath: /var/run/secrets/ca-crt
       - name: my-safe-directory-volume
         mountPath: /var/run/secrets/my-safe-directory
     terminationMessagePolicy: File
@@ -142,7 +152,19 @@ spec:
     name: create-certs
   terminationGracePeriodSeconds: 5
   volumes:
+    - name: certs-gen-volume
+      emptyDir: {}
     - name: certs-volume
-      emptyDir: {}
+      secret:
+        secretName: cockroachdb.ca
+        defaultMode: 0666
+        items: 
+          - key: ca.crt
+            path: ./ca.crt
     - name: my-safe-directory-volume
-      emptyDir: {}
+      secret:
+        secretName: cockroachdb.ca
+        defaultMode: 0666
+        items: 
+          - key: ca.key
+            path: ./ca.key
