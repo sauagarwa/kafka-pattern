@@ -7,4 +7,3 @@
   - name: Run create secrets task
     include_role:
       name: cockroachdb
-      tasks_from: create_secrets
