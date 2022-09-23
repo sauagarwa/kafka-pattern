@@ -15,6 +15,7 @@ clusterGroup:
   - region-one
   - region-two
   - region-three
+  - cockroachdb
 
   subscriptions:
     acm:
@@ -28,12 +29,19 @@ clusterGroup:
   - submariner
 
   applications:
-    golang-external-secret-sync:
-      name: golang-external-secret-sync
-      namespace: golang-external-secrets
+    cockroachdb-ca:
+      name: cockroachdb-ca
+      namespace: cockroachdb
       project: hub
-      path: charts/all/golang-external-secret-sync
-      retry: 100
+      path: charts/all/cockroachdb-ca
+      retry: 15
+    
+    # golang-external-secret-sync:
+    #   name: golang-external-secret-sync
+    #   namespace: golang-external-secrets
+    #   project: hub
+    #   path: charts/all/golang-external-secret-sync
+    #   retry: 100
 
     acm:
       name: acm
@@ -109,39 +117,39 @@ clusterGroup:
       # verbosity: "-v"
 
   managedClusterGroups:
-    region-one:
-      name: region-one
-      provider: aws
-      submariner:
-        instanceType: m5.xlarge
-      helmOverrides:
-      - name: clusterGroup.isHubCluster
-        value: false
-      clusterSelector:
-        matchLabels:
-          clusterGroup: region-one
-    region-two:
-      name: region-two
-      provider: aws
-      submariner:
-        instanceType: m5.xlarge
-      helmOverrides:
-      - name: clusterGroup.isHubCluster
-        value: false
-      clusterSelector:
-        matchLabels:
-          clusterGroup: region-two
-    region-three:
-      name: region-three
-      provider: gcp
-      submariner:
-        instanceType: n2-standard-8
-      helmOverrides:
-      - name: clusterGroup.isHubCluster
-        value: false
-      clusterSelector:
-        matchLabels:
-          clusterGroup: region-three
+    # region-one:
+    #   name: region-one
+    #   provider: aws
+    #   submariner:
+    #     instanceType: m5.xlarge
+    #   helmOverrides:
+    #   - name: clusterGroup.isHubCluster
+    #     value: false
+    #   clusterSelector:
+    #     matchLabels:
+    #       clusterGroup: region-one
+    # region-two:
+    #   name: region-two
+    #   provider: aws
+    #   submariner:
+    #     instanceType: m5.xlarge
+    #   helmOverrides:
+    #   - name: clusterGroup.isHubCluster
+    #     value: false
+    #   clusterSelector:
+    #     matchLabels:
+    #       clusterGroup: region-two
+    # region-three:
+    #   name: region-three
+    #   provider: gcp
+    #   submariner:
+    #     instanceType: n2-standard-8
+    #   helmOverrides:
+    #   - name: clusterGroup.isHubCluster
+    #     value: false
+    #   clusterSelector:
+    #     matchLabels:
+    #       clusterGroup: region-three
 
 #  To have apps in multiple flavors, use namespaces and use helm overrides as appropriate
 #
