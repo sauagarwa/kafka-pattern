@@ -13,7 +13,7 @@ spec:
           - sh
           - -c
           - |
-            echo " Checking service imports ";
+            echo "Checking service imports ";
             CLUSTER_COUNT={{ len .Values.clusters }};
 
             while true;
@@ -23,25 +23,25 @@ spec:
               then
                 break;
               else
-                echo "waiting for submariner to establish connection"
+                echo "Waiting for submariner to establish connection"
               fi
             done;
 
-            echo " Checking submariner gateway is running "
+            echo "Checking submariner gateway is running"
             while true;
             do
               READY_STATUS=$(kubectl get pods -l app=submariner-gateway -n submariner-operator  -o jsonpath='{.items[0].status.containerStatuses[0].ready}');
-              RUNNING_STATUS=$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[0].status.containerStatuses[0].state.running}')
+              RUNNING_STATUS=$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[0].status.containerStatuses[0].state.running}');
               if [ $READY_STATUS = true ] && 
                  [ ! -z RUNNING_STATUS ]; then
-                  echo " Submariner gateway is running "
+                  echo "Submariner gateway is running ";
                   break;
               else 
                 echo "Waiting for submariner gateway to be ready";
               fi
             done;
 
-            echo " Initializing cockroach db"
+            echo "Initializing cockroach db"
             initialized=false;
             while true;
             do
