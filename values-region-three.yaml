@@ -10,21 +10,13 @@ clusterGroup:
 
   namespaces:
   - cockroachdb
-  - golang-external-secrets
 
   subscriptions:
 
   projects:
   - cockroachdb
-  - managed
 
   applications:
-  # - name: golang-external-secret-sync
-  #   namespace: golang-external-secrets
-  #   project: managed
-  #   path: charts/all/golang-external-secret-sync
-  #   retry: 100
-
   # - name: cockroachdb
   #   namespace: cockroachdb
   #   project: cockroachdb
