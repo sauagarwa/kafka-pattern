@@ -29,8 +29,8 @@ clusterGroup:
   - submariner
 
   applications:
-    cockroachdb-ca:
-      name: cockroachdb-ca
+    cockroachdb-ca-crt:
+      name: cockroachdb-ca-crt
       namespace: cockroachdb
       project: hub
       path: charts/all/cockroachdb-ca
