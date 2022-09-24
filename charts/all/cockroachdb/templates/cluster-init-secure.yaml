@@ -5,7 +5,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: create-certs-service-account1
+      serviceAccountName: create-certs-service-account
       containers:
       - name: init-cockroachdb
         image: 'bitnami/kubectl'
@@ -55,8 +55,8 @@ spec:
                 kubectl exec --namespace {{ .Release.Namespace }} -it cockroachdb-0 -- /cockroach/cockroach init --certs-dir=/cockroach/cockroach-certs || true;
                 sleep 20;
                 break;
-              elif [ "$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[0].status.containerStatuses[0].ready}')" = "true" ] && 
-                [ -z "$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[0].status.containerStatuses[0].state.running}')"  ]);
+              elif ([ "$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[0].status.containerStatuses[0].ready}')" = "true" ] && 
+                [ ! -z "$(kubectl get pods -l=app='cockroachdb' -o jsonpath='{.items[0].status.containerStatuses[0].state.running}')"  ]);
                 break;
               then
                 echo "Waiting for CockroachDb to start"
