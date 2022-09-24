@@ -19,10 +19,12 @@ rules:
       - extensions
       - policy
       - rbac.authorization.k8s.io
+      - multicluster.x-k8s.io
     resources:
       - secrets
       - pods
       - serviceaccounts
+      - serviceimports
       - Role
       - RoleBinding
       - nodes
@@ -45,6 +47,39 @@ subjects:
 - namespace: cockroachdb
   kind: ServiceAccount
   name: create-certs-service-account
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: create-certs-role
+rules:
+- apiGroups:
+  - multicluster.x-k8s.io
+  - ""
+  resources:
+  - serviceimports
+  - pods
+  verbs:
+  - create
+  - get
+  - watch
+  - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: create-certs-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: create-certs-role
+subjects:
+- kind: ServiceAccount
+  name: create-certs-service-account
+  namespace: cockroachdb
+- kind: ServiceAccount
+  name: create-certs-service-account
+  namespace: submariner-operator
 ---
 apiVersion: v1
 kind: Pod
