@@ -121,11 +121,22 @@ clusterGroup:
       clusterSelector:
         matchLabels:
           clusterGroup: region-one
+    # region-two:
+    #   name: region-two
+    #   provider: aws
+    #   submariner:
+    #     instanceType: m5.xlarge
+    #   helmOverrides:
+    #   - name: clusterGroup.isHubCluster
+    #     value: false
+    #   clusterSelector:
+    #     matchLabels:
+    #       clusterGroup: region-two
     region-two:
       name: region-two
-      provider: aws
+      provider: az
       submariner:
-        instanceType: m5.xlarge
+        instanceType: Standard_D4s_V3
       helmOverrides:
       - name: clusterGroup.isHubCluster
         value: false
