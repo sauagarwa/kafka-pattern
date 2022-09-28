@@ -51,7 +51,7 @@ spec:
   credentialsSecret:
     name: {{ .name }}-aws-creds
 {{- end }}
-{{- if or (eq .provider "gcp") (eq .provider "az") }}
+{{- if eq .provider "gcp" }}
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
